@@ -1,0 +1,22 @@
+<?php
+$idt=$_GET['idt'];
+$link = mysqli_connect("sql308.epizy.com", "epiz_27873369", "hElJ1U0t6Exnf", "epiz_27873369_RMS");
+ 
+// Check connection
+if($link === false){
+    die("ERROR: Could not connect. " . mysqli_connect_error());
+}
+ 
+// Attempt update query execution
+$sql = "UPDATE pay SET statust='Busy' WHERE idt='$idt'";
+if(mysqli_query($link, $sql)){
+    echo '<script> alert("Records were updated successfully.");</script>';
+    header("Refresh:0; url=adminDashboard.php");
+    
+} else {
+    echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+}
+ 
+// Close connection
+mysqli_close($link);
+?>
